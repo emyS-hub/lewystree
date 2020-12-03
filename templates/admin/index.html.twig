@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	DashBoard
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Gestion des liens</h1>
+
+		<a href="{{ path('admin_create') }}" class="btn btn-outline-success mb-3">Ajouter</a>
+
+		<table class="table striped">
+			<thead>
+				<tr>
+					<th>Icône</th>
+					<th>Titre</th>
+					<th>Url</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for link in links %}
+					<tr>
+						<td>{{  links.icon }}</td>
+						<td>{{ links.title }}</td>
+						<td>{{ links.url }}</td>
+						<td></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
+{% endblock %}
