@@ -5,18 +5,29 @@ namespace App\Controller\Admin;
 use App\Entity\Link;
 use App\Form\LinkType;
 use App\Repository\LinkRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminLinkController extends AbstractController
 {
+    private $em;
+    private $repository;
+
+    public function __construct(EntityManagerInterface $em, LinkRepository $repository)
+    {
+        $this->em = $em;
+        $this->repository = $repository;
+    }
+
     /**
      * @Route("/admin" , name="admin_index")
      */
-    public function index(LinkRepository $linkRepository)
+    public function index(LinkRepository $repository): Response
     {
-        $link = $linkRepository->findAll();
+        $link = $repository->findAll();
 
         return $this->render('admin/index.html.twig', [
             'links' => $link
@@ -31,6 +42,12 @@ class AdminLinkController extends AbstractController
         $link = new Link();
         $form = $this->createForm(LinkType::class, $link);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($link);
+            $this->em->flush();
+            return $this->redirectToRoute('admin_index', [], 301);
+        }
 
         return $this->render('admin/create.html.twig', [
             'formLink' => $form->createView()

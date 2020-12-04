@@ -6,7 +6,10 @@
 
 	{% for link in links %}
 		<p>
-			<a href={{ link.url }}>{{ link.title }}</a>
+
+			<button type="button" class="btn btn-outline-dark mb-2">
+				<a href={{ link.url }}>{{ link.icon}}{{ link.title }}</a>
+			</button>
 		</p>
 	{% endfor %}
 
