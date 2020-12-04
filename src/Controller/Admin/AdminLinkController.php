@@ -44,12 +44,33 @@ class AdminLinkController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->em->persist($link);
             $this->em->flush();
+            $this->addFlash('success', "Le lien a bien été enregistré");
             return $this->redirectToRoute('admin_index', [], 301);
         }
 
         return $this->render('admin/create.html.twig', [
+            'formLink' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/edit{id}" , name="admin_edit")
+     */
+    public function edit(Request $request, int $id)
+    {
+        $link = $this->repository->find($id);
+        $form = $this->createForm(LinkType::class, $link);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->flush();
+            return $this->redirectToRoute('admin_index', [], 301);
+        }
+
+        return $this->render('admin/edit.html.twig', [
             'formLink' => $form->createView()
         ]);
     }

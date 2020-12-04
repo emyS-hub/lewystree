@@ -6,6 +6,12 @@
 
 {% block body %}
 	<div class="container">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+
 		<h1>Gestion des liens</h1>
 
 		<a href="{{ path('admin_create') }}" class="btn btn-outline-success mb-3">Ajouter</a>
@@ -25,7 +31,10 @@
 						<td>{{ link.icon }}</td>
 						<td>{{ link.title }}</td>
 						<td>{{ link.url }}</td>
-						<td></td>
+						<td>
+							<a href="{{ path('admin_edit', {id: link.id}) }}" class="btn btn-outline-info">Éditer</a>
+							<a href="" class="btn btn-outline-danger">Supprimer</a>
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
