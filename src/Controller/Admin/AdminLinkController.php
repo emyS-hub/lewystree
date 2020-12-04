@@ -67,6 +67,7 @@ class AdminLinkController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
+            $this->addFlash('success', "Le lien a bien été modifié");
             return $this->redirectToRoute('admin_index', [], 301);
         }
 

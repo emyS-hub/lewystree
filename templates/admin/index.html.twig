@@ -1,9 +1,5 @@
 {% extends "base.html.twig" %}
 
-{% block title %}
-	DashBoard
-{% endblock %}
-
 {% block body %}
 	<div class="container">
 		{% for message in app.flashes('success') %}
@@ -12,7 +8,7 @@
 			</div>
 		{% endfor %}
 
-		<h1>Gestion des liens</h1>
+		<h1>Dashboard</h1>
 
 		<a href="{{ path('admin_create') }}" class="btn btn-outline-success mb-3">Ajouter</a>
 
