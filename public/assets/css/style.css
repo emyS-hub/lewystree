@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+body {
+    font-family: '';
+
+}
+
+a {
+    color: #fff;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+}
+
+img {
+    max-width: 96px;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-transform: capitalize;
+    color: #412413;
+}
+
+h1,
+h2 {
+    text-align: center;
+    padding: 1em 0
+}
+
+.btn {
+    background: black;
+    border-radius: 50px;
+    width: 50%;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+input {
+    padding: 0.3em;
+    border-radius: 6px;
+}

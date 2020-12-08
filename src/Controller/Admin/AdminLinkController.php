@@ -75,4 +75,17 @@ class AdminLinkController extends AbstractController
             'formLink' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin/delete{id}" , name="admin_delete")
+     */
+    public function delete(Request $request, int $id)
+    {
+        $link = $this->repository->find($id);
+
+        $this->em->remove($link);
+        $this->em->flush();
+        $this->addFlash('success', "Le lien a bien été supprimé");
+        return $this->redirectToRoute('admin_index', [], 301);
+    }
 }
