@@ -5,10 +5,11 @@
 		<title>
 			{% block title %}{% endblock %}
 		</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-		<link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
-		<script src="https://kit.fontawesome.com/c12bae1b45.js" crossorigin="anonymous"></script>
-		{% block stylesheets %}{% endblock %}
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+			<link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
+			<script src="https://kit.fontawesome.com/c12bae1b45.js" crossorigin="anonymous"></script>
+		{% endblock %}
 	</head>
 	<body>
 		<div class="container text-center">
@@ -25,11 +26,11 @@
 					<ul class="navbar-nav ">
 						{% if app.user %}
 							<button type="button" class="btn btn-outline-dark mb-2">
-								<a href="{{path('app_login')}}">Logout</a>
+								<a href="{{path('app_login')}}">Déconnexion</a>
 							</button>
 						{% else %}
 							<button type="button" class="btn btn-outline-dark mb-2">
-								<a href="{{path('app_login')}}">Login</a>
+								<a href="{{path('app_login')}}">Connexion</a>
 							</button>
 						{% endif %}
 					</ul>

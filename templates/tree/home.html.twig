@@ -4,17 +4,16 @@
 
 	<div>
 		<h1>
-			<img src="/assets/img/logo_lewys.png" alt=""/>
-		</br>
-		{{ title }}
-	</h1>
-</div>
+			{{ title }}
+		</h1>
+	</div>
 
-{% for link in links %}
-	<p>
+	{% for link in links %}
+		<p>
 
-		<button type="button" class="btn btn-outline-dark mb-2">
-			<a href={{ link.url }}>{{ link.icon}}{{ link.title }}</a>
-		</button>
-	</p>
-{% endfor %}{% endblock %}
+			<button type="button" class="btn btn-outline-dark mb-2">
+				<a href={{ link.url }}>{{ link.icon}}{{ link.title }}</a>
+			</button>
+		</p>
+	{% endfor %}
+{% endblock %}
