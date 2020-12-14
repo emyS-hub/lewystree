@@ -5,14 +5,16 @@
 		<title>
 			{% block title %}{% endblock %}
 		</title>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/c12bae1b45.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="{{asset('build/app.css')}}">
 		{% block stylesheets %}
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-			<link href="{{ asset ('assets/css/style.css') }}" rel="stylesheet">
-			<script src="https://kit.fontawesome.com/c12bae1b45.js" crossorigin="anonymous"></script>
+			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 	</head>
 	<body>
-		<div class="container text-center">
+		<div class=" container text-center">
 
 			<nav class="navbar navbar-expand-lg navbar-light ">
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,7 +40,7 @@
 			</nav>
 
 			{% block body %}{% endblock %}
-		</div>
-		{% block javascripts %}{% endblock %}
+		</head>
 	</body>
-</html></body></html>
+</html></div>{% block javascripts %}
+{{ encore_entry_script_tags('app') }}{% endblock %}</body></html></body></html>
