@@ -13,10 +13,16 @@
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 	</head>
+
 	<body>
 		<div class=" container text-center">
 
 			<nav class="navbar navbar-expand-lg navbar-light ">
+
+				<a class="navbar-brand" href="{{path('home')}}">
+					<i class="fas fa-home"></i>
+				</a>
+
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
 						{% if is_granted('ROLE_ADMIN', app.user) %}
@@ -25,17 +31,19 @@
 							</li>
 						{% endif %}
 					</ul>
+
 					<ul class="navbar-nav ">
 						{% if app.user %}
 							<button type="button" class="btn btn-outline-dark mb-2">
-								<a href="{{path('app_login')}}">Déconnexion</a>
+								<a href="{{path('app_logout')}}">Déconnexion</a>
 							</button>
 						{% else %}
 							<button type="button" class="btn btn-outline-dark mb-2">
-								<a href="{{path('app_login')}}">Connexion</a>
+								<a href="{{ path('app_login') }}">Connexion</a>
 							</button>
 						{% endif %}
 					</ul>
+
 				</div>
 			</nav>
 
