@@ -8,7 +8,7 @@
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 		<script src="https://kit.fontawesome.com/c12bae1b45.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="{{asset('build/app.css')}}">
+		<link rel="stylesheet" href="{{ asset('/css/main.css')}}">
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
@@ -34,11 +34,11 @@
 
 					<ul class="navbar-nav ">
 						{% if app.user %}
-							<button type="button" class="btn btn-outline-dark mb-2">
+							<button type="button" class="btn btn-outline-dark mb-2" id="login">
 								<a href="{{path('app_logout')}}">Déconnexion</a>
 							</button>
 						{% else %}
-							<button type="button" class="btn btn-outline-dark mb-2">
+							<button type="button" class="btn btn-outline-dark mb-2" id="login">
 								<a href="{{ path('app_login') }}">Connexion</a>
 							</button>
 						{% endif %}

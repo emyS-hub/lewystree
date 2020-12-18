@@ -1,22 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
 
-body {
-    font-family: '';
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: black;
 }
 
-a {
-    color: #fff;
+body,
+html {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 18px;
+    height: 100%;
+    position: relative;
 }
 
-a:hover,
-a:focus,
-a:active {
+a,
+a:hover {
+    color: black;
     text-decoration: none;
 }
 
 img {
-    max-width: 96px;
+    max-width: 116px;
 }
 
 h1 {
@@ -27,13 +33,23 @@ h1 {
 
 h1,
 h2 {
-    text-align: center;
     padding: 1em 0
 }
 
 .btn {
-    background: black;
+    border: solid;
+    min-width: 500px;
     border-radius: 50px;
+}
+
+#login {
+    min-width: 100px;
+}
+
+#index {
+    min-width: 15px;
+    max-width: 45px;
+
 }
 
 label {

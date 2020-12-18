@@ -10,7 +10,7 @@
 
 		<h1>Dashboard</h1>
 
-		<a href="{{ path('admin_create') }}" class="btn btn-outline-success mb-3">
+		<a href="{{ path('admin_create') }}" class="btn btn-outline-success mb-3" id="index">
 			<i class="fas fa-plus"></i>
 		</a>
 
@@ -30,7 +30,7 @@
 						<td>{{ link.title }}</td>
 						<td>{{ link.url }}</td>
 						<td>
-							<a href="{{ path('admin_edit', {id: link.id}) }}" class="btn btn-info">
+							<a href="{{ path('admin_edit', {id: link.id}) }}" class="btn btn-info" id="index">
 								<i class="fas fa-edit"></i>
 							</a>
 
@@ -38,7 +38,7 @@
 							<form method="POST" action="{{ path('admin_delete', {id: link.id}) }}" style="display: inline-block;" onsubmit="return confirm('Confirmation de votre suppression')">
 								<input type="hidden" name="_method" value="DELETE">
 								<input type="hidden" name="_token" value="{{ csrf_token('token_id') }}">
-								<button class="btn btn-danger">
+								<button class="btn btn-danger" id="index">
 									<i class="far fa-trash-alt"></button>
 								</form>
 							</td>
