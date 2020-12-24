@@ -30,5 +30,5 @@ class CustomValidatorForCommand
             throw new InvalidArgumentException('Mot de passe saisi invalide');
         }
 
-        return $passwordEntered
+        return $plainPassword
     }

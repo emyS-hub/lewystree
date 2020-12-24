@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -91,9 +92,26 @@ class AddOneAdminCommand extends Command
         $passwordQuestion->setValidator([$this->validator, 'validatePassword']);
         $passwordQuestion->setHidden(True)
             ->setHiddenFallback(False);
+
+        $password = $helper->ask($input, $output, $passwordQuestion);
+
+        $input->setArgument('password', $password);
     }
 
     private function enterRole(InputInterface $input, OutputInterface $output): void
     {
+        $helper = $this->getHelper('question');
+
+        $roleQuestion = new ChoiceQuestion(
+            "Sélection du rôle user",
+            ['ROLE_USER', 'ROLE_ADMIN'],
+            'ROLE_USER'
+        );
+
+        $roleQuestion->setErrorMessage('Rôle user invalide');
+
+        $role = $helper->ask($input, $output, $roleQuestion);
+
+        $input->setArgument('role', $role);
     }
 }
