@@ -2,13 +2,12 @@
 
 namespace App\Command;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\PseudoTypes\True_;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
@@ -36,7 +35,7 @@ class AddOneAdminCommand extends Command
         $this
             ->setDescription('Créer un user en base de données')
             ->addArgument('username', InputArgument::REQUIRED, 'Identifiant user')
-            ->addArgument('password', InputArgument::REQUIRED, 'Mot de passe user')
+            ->addArgument('plainpassword', InputArgument::REQUIRED, 'Mot de passe user')
             ->addArgument('role', InputArgument::REQUIRED, 'Role user');
     }
 
@@ -56,18 +55,24 @@ class AddOneAdminCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
+        /** @var string $username */
+        $username = $input->getArgument('username');
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
-        }
+        /** @var string $plainPassword */
+        $plainPassword = $input->getArgument('plainPassword');
 
-        if ($input->getOption('option1')) {
-            // ...
-        }
+        /** @var string $role */
+        $role = [$input->getArgument('role')];
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $user = new User();
+
+        $user->setUsername($username)
+            ->setPassword($this->encoder->encodePassword($user, $plainPassword))
+            ->setRoles([$role]);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        $this->io->success("Un nouvel utilisateur est inscrit en base de données");
 
         return Command::SUCCESS;
     }
@@ -95,7 +100,7 @@ class AddOneAdminCommand extends Command
 
         $password = $helper->ask($input, $output, $passwordQuestion);
 
-        $input->setArgument('password', $password);
+        $input->setArgument('plainpassword', $password);
     }
 
     private function enterRole(InputInterface $input, OutputInterface $output): void
