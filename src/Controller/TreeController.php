@@ -12,8 +12,6 @@ use App\Repository\LinkRepository;
 
 class TreeController extends AbstractController
 {
-    private EntityManagerInterface $em;
-
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
