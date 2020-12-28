@@ -25,6 +25,7 @@ class AddOneAdminCommand extends Command
 
     public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $encoder, UserRepository $userRepository)
     {
+        parent::__construct();
         $this->entityManager = $em;
         $this->encoder = $encoder;
         $this->userRepository = $userRepository;
@@ -35,7 +36,7 @@ class AddOneAdminCommand extends Command
         $this
             ->setDescription('Créer un user en base de données')
             ->addArgument('username', InputArgument::REQUIRED, 'Identifiant user')
-            ->addArgument('plainpassword', InputArgument::REQUIRED, 'Mot de passe user')
+            ->addArgument('plainPassword', InputArgument::REQUIRED, 'Mot de passe user')
             ->addArgument('role', InputArgument::REQUIRED, 'Role user');
     }
 
@@ -82,7 +83,6 @@ class AddOneAdminCommand extends Command
         $helper = $this->getHelper('question');
 
         $usernameQuestion = new Question("Identifiant User :");
-        $usernameQuestion->setValidator([$this->validator, 'validateUsername']);
 
         $username = $helper->ask($input, $output, $usernameQuestion);
 
@@ -94,13 +94,13 @@ class AddOneAdminCommand extends Command
         $helper = $this->getHelper('question');
 
         $passwordQuestion = new Question("Mot de passe User :");
-        $passwordQuestion->setValidator([$this->validator, 'validatePassword']);
+
         $passwordQuestion->setHidden(True)
             ->setHiddenFallback(False);
 
         $password = $helper->ask($input, $output, $passwordQuestion);
 
-        $input->setArgument('plainpassword', $password);
+        $input->setArgument('plainPassword', $password);
     }
 
     private function enterRole(InputInterface $input, OutputInterface $output): void
