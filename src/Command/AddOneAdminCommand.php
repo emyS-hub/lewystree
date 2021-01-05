@@ -37,7 +37,7 @@ class AddOneAdminCommand extends Command
             ->setDescription('Créer un user en base de données')
             ->addArgument('username', InputArgument::REQUIRED, 'Identifiant user')
             ->addArgument('plainPassword', InputArgument::REQUIRED, 'Mot de passe user')
-            ->addArgument('role', InputArgument::REQUIRED, 'Role user');
+            ->addArgument('roles', InputArgument::REQUIRED, 'Role user');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
@@ -50,7 +50,7 @@ class AddOneAdminCommand extends Command
         $this->io->section("Ajout d'un user en base de données");
         $this->enterUsername($input, $output);
         $this->enterPassword($input, $output);
-        $this->enterRole($input, $output);
+        $this->enterRoles($input, $output);
     }
 
 
@@ -62,14 +62,14 @@ class AddOneAdminCommand extends Command
         /** @var string $plainPassword */
         $plainPassword = $input->getArgument('plainPassword');
 
-        /** @var string $role */
-        $role = [$input->getArgument('role')];
+        /** @var array<string> $roles */
+        $roles = [$input->getArgument('roles')];
 
         $user = new User();
 
         $user->setUsername($username)
             ->setPassword($this->encoder->encodePassword($user, $plainPassword))
-            ->setRoles([$role]);
+            ->setRoles([$roles]);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
@@ -103,7 +103,7 @@ class AddOneAdminCommand extends Command
         $input->setArgument('plainPassword', $password);
     }
 
-    private function enterRole(InputInterface $input, OutputInterface $output): void
+    private function enterRoles(InputInterface $input, OutputInterface $output): void
     {
         $helper = $this->getHelper('question');
 
@@ -115,8 +115,8 @@ class AddOneAdminCommand extends Command
 
         $roleQuestion->setErrorMessage('Rôle user invalide');
 
-        $role = $helper->ask($input, $output, $roleQuestion);
+        $roles = $helper->ask($input, $output, $roleQuestion);
 
-        $input->setArgument('role', $role);
+        $input->setArgument('roles', $roles);
     }
 }
